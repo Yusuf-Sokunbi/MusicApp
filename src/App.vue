@@ -19,6 +19,10 @@
        {{ song.title }}
         </button>
       </section>
+      <!-- <div>
+        <audio v-if="audioUrl" :src="audioUrl" controls></audio>
+        <p v-else>Loading audio...</p>
+      </div> -->
       <!-- <ul>
         <li v-for="song in songs">
           <p>{{ song.title }}</p>
@@ -35,10 +39,14 @@
 </template>
 
 <script>
+// import {ref as storageRef, getDownloadURL} from "firebase/storage";
+// import {storage} from "./firebase.js"
 export default {
   name: 'app',
   data () {
     return {
+      audioUrl:null,
+      audioFilePath:'folder/yusuf/day15.mp3',
       current:{},
       index:0,
       isPlaying:false,  
@@ -115,8 +123,21 @@ this.player.src =this.current.music;
 
       this.current = this.songs[this.index]
       this.play(this.current)
-    }
-  }
+    },
+
+    // async fetchAudio() {
+    //     const fileRef = storageRef(storage, this.audioFilePath);
+    //     try {
+    //       this.audioUrl = await getDownloadURL(fileRef);
+    //       console.log("Audio URL:", this.audioUrl);
+    //     } catch (error) {
+    //       console.error("Error fetching audio URL:", error);
+    //     }
+    //   },
+  },
+  // mounted() {
+  //     this.fetchAudio();
+  //   },
 }
 </script>
 
